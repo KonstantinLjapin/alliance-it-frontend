@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+
+  web:
+    build: .
+    env_file:
+      - ./.env
+    stop_signal: SIGINT
+    container_name: web
+    command: npm start
+    volumes:
+      - ./dump/app:/usr/src/app
+    expose:
+      - "3000:3000"
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
