@@ -2,14 +2,16 @@ import './App.css';
 import {useState} from "react";
 
 
-function ListCoordinates(){
-    const numbers = [1, 2, 3, 4, 5];
-    const listItems = numbers.map((number) => <ol key={number.toString()}>{number}</ol>);
+
+
+
+function ListCoordinates({value}){
+    const listItems = value.map((number) => <ol key={number.toString()}>{number}</ol>);
     return(listItems);
 }
 function InputCoordinates() {
   const [lon, setFirstName] = useState('');
-  function out
+  function out() { console.log("OK")}
   return (
     <>
         <label>
@@ -18,7 +20,7 @@ function InputCoordinates() {
                 value={lon}
                 onChange={e => setFirstName(e.target.value)}
             />
-            <button onClick={() => }>
+            <button onClick={() => out()}>
                 input
             </button>
         </label>
@@ -30,10 +32,11 @@ function InputCoordinates() {
 }
 
 function App() {
+    const v = [1,2,7]
     return (
         <div className="App">
             <div className="wrapper">
-                <div className="block"><ListCoordinates/></div>
+                <div className="block"><ListCoordinates value={v}/></div>
           <div className="block"><InputCoordinates/></div>
         </div>
       </div>
