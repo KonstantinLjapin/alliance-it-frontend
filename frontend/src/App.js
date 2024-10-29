@@ -3,8 +3,8 @@ import {useState} from "react";
 
 
 function App() {
-    const v = [1, 2, 7];
-    const data = [{key: '1',lon: 'xxx', lat: 'yyy'},];
+    const v = [1, 2, 7,5,7,7];
+    const data = [{lon: 'xxx', lat: 'yyy'},{lon: 'vvv', lat: 'zzz'}];
 
 
 function DictMapCoordinates(){
