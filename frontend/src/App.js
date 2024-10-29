@@ -4,12 +4,21 @@ import {useState} from "react";
 
 function App() {
     const v = [1, 2, 7];
+    const data = [{key: '1',lon: 'xxx', lat: 'yyy'},];
 
-    function ApperList(lon, lat){
+
+function DictMapCoordinates(){
+    let output = Object.fromEntries(data.map(v => [ v.lat, v.lon]));
+    console.log(output);
+}
+
+
+function ApperList(lon, lat){
 console.log(lon, lat)
 }
 function ListCoordinates({value}){
     const listItems = value.map((number) => <ol key={number.toString()}>{number}</ol>);
+    DictMapCoordinates();
     return(listItems);
 }
 function InputCoordinates() {
