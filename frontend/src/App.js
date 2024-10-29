@@ -5,24 +5,26 @@ import {useState} from "react";
 function App() {
     const v = [1, 2, 7];
 
-    function ApperList(){
-console.log("TAP")
+    function ApperList(lon, lat){
+console.log(lon, lat)
 }
 function ListCoordinates({value}){
     const listItems = value.map((number) => <ol key={number.toString()}>{number}</ol>);
     return(listItems);
 }
 function InputCoordinates() {
-        let [lon, setLon] = useState(null);
-        let [lat, setLat] = useState(null);
+        let [lon, setLon] = useState('1');
+        let [lat, setLat] = useState('1');
         function SwitcherLATLON(){
-            if (!(!lat !== '')) {
-
-            } else {
-                ApperList();
+            if ((/[^1]/.test(lon))&&(/[^1]/.test(lat))) {
+                ApperList(lon, lat);
+                setLon('1')
+                setLat('1')
             }
-
-
+            else {
+                setLon('1')
+                setLat('1')
+            }
         }
 
   return (
