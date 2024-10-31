@@ -3,15 +3,7 @@ import {useState} from "react";
 
 
 function App() {
-    const v = [1, 2, 3,4,5,6,7];
     const [map_lon_lat, set_map_lon_lat] = useState([]);
-    const data = [{lon: 'xxx', lat: 'yyy'},{lon: 'vvv', lat: 'zzz'}];
-
-
-function DictMapCoordinates(){
-    let output = data.map(v =>[ v.lat, v.lon]);
-    console.log(output);
-}
 
 
 function ApperList(lon, lat){
@@ -19,10 +11,14 @@ function ApperList(lon, lat){
     let element = { lon: lon, lat: lat };
     array.push(element);
     set_map_lon_lat(array);
-    console.log("load", map_lon_lat)
+
 }
-function ListCoordinates({value}){
-    const listItems = value.map((number) => <ol key={number.toString()}>{number}</ol>);
+function ListCoordinates(){
+    if (Object.keys(map_lon_lat).length === 0) {
+        console.log('пуст');
+    }
+    const listItems= <li>{[1,2,3,4,5]}</li>;
+    console.log("load", map_lon_lat)
     return(listItems);
 }
 function InputCoordinates() {
@@ -74,7 +70,7 @@ function InputCoordinates() {
 return (
         <div className="App">
             <div className="wrapper">
-                <div className="block"><ListCoordinates value={v}/></div>
+                <div className="block"><ListCoordinates/></div>
           <div className="block"><InputCoordinates/></div>
         </div>
       </div>
