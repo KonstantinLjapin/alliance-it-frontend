@@ -101,7 +101,7 @@ function InputCoordinates() {
           {lat !== '' &&
               <p>LAT is {lat}.</p>
           }
-          <button onClick={() => SwitcherLATLON()}>
+          <button className="button" onClick={() => SwitcherLATLON()}>
               input
           </button>
       </>
