@@ -38,9 +38,9 @@
 }
 .wrapper {
   display: compact;
+  margin-left: 10px;
 }
 .block {
   display: inline-block;
-
   margin: 50px;
 }

@@ -4,41 +4,63 @@ import {useState} from "react";
 
 function App() {
     const [map_lon_lat, set_map_lon_lat] = useState([]);
-function UploaderGeographic(){
+function UploaderGeographic(lon,lat ){
+
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-  "lon": -73.6101167,
-  "lat": 44.6548902
+  "lon": lon,
+  "lat": lat
 })
     };
     fetch('http://0.0.0.0:8000/api/register', requestOptions)
-        .then(response => response.text())
-        .then((geojson) => {
-             console.log("my_data: ", geojson);});
+        .then(response => response.json())
+        .then((data) => {console.log("my_data: ", data);})
+        .catch(error => console.error(error));
 }
 function LoadGeographic(){
     fetch('http://0.0.0.0:8000/api/allfilds')
   .then(response => response.json())
-  .then(data => console.log(data))
+  .then(data => set_map_lon_lat(data.features))
   .catch(error => console.error(error));
 }
 function ApperList(lon, lat){
-    let array = map_lon_lat;
-    let element = { lon: lon, lat: lat };
-    array.push(element);
-    set_map_lon_lat(array);
-    LoadGeographic();
-    UploaderGeographic();
+
+    function isNumber(n){
+        if (Number(n)) {
+            return true;
+        }
+        else {
+            if (parseFloat(n)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (isNumber(lon) && isNumber(lat)){
+        let array = map_lon_lat;
+        let element = { lon: lon, lat: lat };
+        array.push(element);
+        set_map_lon_lat(array);
+        UploaderGeographic(lon, lat);
+        setTimeout(function(){window.location.reload();}, 300);
+    }
+    else {
+        console.log("Error not validate data lon, lat")
+
+    }
+
+
 }
 
 function ListCoordinates(){
     if (Object.keys(map_lon_lat).length === 0) {
-        console.log('пуст');
+        console.log('empty_list try load');
+        LoadGeographic();
     }
-    const listItems= <li>{[1,2,3,4,5]}</li>;
-    console.log("load", map_lon_lat)
+    const listItems= map_lon_lat.map((number) =>
+  <li align="left">lon= {number.geometry.coordinates[0]}  || lat= {number.geometry.coordinates[1]}</li>);
     return(listItems);
 }
 function InputCoordinates() {
