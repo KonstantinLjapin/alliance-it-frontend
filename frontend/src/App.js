@@ -56,7 +56,7 @@ function ApperList(lon, lat){
 
 function ListCoordinates(){
     if (Object.keys(map_lon_lat).length === 0) {
-        console.log('empty_list try load');
+        console.log('empty_list App.js try load');
         LoadGeographic();
     }
     const listItems= map_lon_lat.map((number) =>
