@@ -8,10 +8,9 @@ services:
       - ./.env
     stop_signal: SIGINT
     container_name: web
-    command: npm start
     volumes:
       - ./dump/app:/usr/src/app
-    expose:
+    ports:
       - "3000:3000"
     networks:
       - frontend

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 function App() {
     const [map_lon_lat, set_map_lon_lat] = useState([]);
-
+    const [button_state, set_button_state] = useState(true);
     useEffect(() => {
         LoadGeographic();
     }, []);
@@ -24,13 +24,17 @@ function App() {
     };
 
     const LoadGeographic = async () => {
-        try {
+        if (button_state)
+        {try {
             const response = await fetch('http://0.0.0.0:8000/api/allfilds');
             const data = await response.json();
             set_map_lon_lat(data.features);
+            set_button_state(false);
         } catch (error) {
             console.error(error);
         }
+        }
+
     };
 
     const ApperList = (lon, lat) => {
@@ -60,6 +64,7 @@ function App() {
 
         const SwitcherLATLON = () => {
             if (!isNaN(lon) && !isNaN(lat)) {
+                set_button_state(true);
                 ApperList(lon, lat);
                 setLon('Enter');
                 setLat('Enter');
